@@ -16,7 +16,6 @@ body {
     color: #7a2e4d;
 }
 
-/* Subtle Saree Pattern Overlay */
 body::before {
     content: "";
     position: absolute;
@@ -27,7 +26,6 @@ body::before {
     z-index: 0;
 }
 
-/* Main Container */
 .container {
     position: relative;
     z-index: 2;
@@ -36,27 +34,31 @@ body::before {
     border-radius: 20px;
     box-shadow: 0 10px 40px rgba(0,0,0,0.1);
     max-width: 400px;
-    margin: 15vh auto;
+    margin: 10vh auto;
     animation: fadeIn 2s ease-in-out;
 }
 
+.logo {
+    width: 120px;
+    margin-bottom: 15px;
+}
+
 h1 {
-    font-size: 28px;
+    font-size: 26px;
     margin-bottom: 15px;
 }
 
 p {
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.6;
 }
 
 .brand {
-    margin-top: 20px;
+    margin-top: 15px;
     font-weight: bold;
     letter-spacing: 2px;
 }
 
-/* Surprise Button */
 #surpriseBtn {
     display: none;
     margin-top: 25px;
@@ -73,27 +75,25 @@ p {
     background: #a13d66;
 }
 
-/* Fade In Animation */
 @keyframes fadeIn {
     from {opacity: 0; transform: translateY(20px);}
     to {opacity: 1; transform: translateY(0);}
 }
 
-/* Falling Petals */
-.petal {
+.petal, .confetti {
     position: absolute;
-    top: -50px;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    opacity: 0.7;
-    animation: fall linear infinite;
+    top: -20px;
+    width: 10px;
+    height: 10px;
+    opacity: 0.8;
 }
 
 @keyframes fall {
-    to {
-        transform: translateY(110vh) rotate(360deg);
-    }
+    to { transform: translateY(110vh) rotate(360deg); }
+}
+
+@keyframes burst {
+    to { transform: translateY(100vh) rotate(720deg); opacity: 0; }
 }
 </style>
 </head>
@@ -106,6 +106,8 @@ p {
 </audio>
 
 <div class="container">
+    <img src="logo.png" class="logo" alt="VarnaVastra Logo">
+
     <h1>Thank You 💛</h1>
     <p>
         In just one month,<br>
@@ -113,35 +115,54 @@ p {
         Every order, every blessing, every message
         means the world to us.
     </p>
-    <div class="brand">
-        ✨ VarnaVastra ✨
-    </div>
 
-    <button id="surpriseBtn" onclick="alert('A Special Thank You Offer is Coming Tomorrow 💛')">
-        🎁 Surprise Coming Soon
+    <div class="brand">✨ VarnaVastra ✨</div>
+
+    <button id="surpriseBtn"
+        onclick="window.location.href='https://instagram.com/varnavastra4you'">
+        🎁 Visit Our Instagram
     </button>
 </div>
 
 <script>
-/* Start Music On First Tap (Works On Chrome Mobile) */
+
+/* Start Music On First Tap */
 document.addEventListener("click", function () {
     document.getElementById("bgMusic").play();
 }, { once: true });
 
-/* Create Falling Petals */
+/* Falling Petals */
 for (let i = 0; i < 25; i++) {
     let petal = document.createElement("div");
     petal.classList.add("petal");
     petal.style.left = Math.random() * 100 + "vw";
-    petal.style.animationDuration = (5 + Math.random() * 5) + "s";
+    petal.style.animation = "fall " + (5 + Math.random() * 5) + "s linear infinite";
     petal.style.background = ["#f8c8dc","#f4a6c1","#ffd1dc"][Math.floor(Math.random()*3)];
     document.body.appendChild(petal);
 }
 
-/* Show Surprise Button After 6 Seconds */
+/* Confetti Celebration Burst */
+setTimeout(() => {
+    for (let i = 0; i < 40; i++) {
+        let conf = document.createElement("div");
+        conf.classList.add("confetti");
+        conf.style.left = Math.random() * 100 + "vw";
+        conf.style.background = ["#ff4d6d","#ff99c8","#ffd6a5","#cdb4db"][Math.floor(Math.random()*4)];
+        conf.style.animation = "burst 4s linear forwards";
+        document.body.appendChild(conf);
+    }
+}, 3000);
+
+/* Show Button After 6 Seconds */
 setTimeout(() => {
     document.getElementById("surpriseBtn").style.display = "inline-block";
 }, 6000);
+
+/* Auto Redirect After 12 Seconds */
+setTimeout(() => {
+    window.location.href = "https://instagram.com/varnavastra4you";
+}, 12000);
+
 </script>
 
 </body>
