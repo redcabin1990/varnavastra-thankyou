@@ -56,7 +56,7 @@ p {
     letter-spacing: 2px;
 }
 
-/* Hidden Surprise Button */
+/* Surprise Button */
 #surpriseBtn {
     display: none;
     margin-top: 25px;
@@ -101,7 +101,7 @@ p {
 <body>
 
 <!-- Background Music -->
-<audio autoplay loop playsinline>
+<audio id="bgMusic" loop>
     <source src="Zara zara.mp3" type="audio/mpeg">
 </audio>
 
@@ -123,6 +123,11 @@ p {
 </div>
 
 <script>
+/* Start Music On First Tap (Works On Chrome Mobile) */
+document.addEventListener("click", function () {
+    document.getElementById("bgMusic").play();
+}, { once: true });
+
 /* Create Falling Petals */
 for (let i = 0; i < 25; i++) {
     let petal = document.createElement("div");
